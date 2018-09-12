@@ -1,0 +1,90 @@
+#!/bin/bash
+# -*- coding: utf-8 -*-
+#
+#  mycroft
+#  
+#  Copyright 2017 Thomas Castleman <thomas.castleman2019@gmail.com>
+#  
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#  
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#  
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#
+
+#Set variables ahead of time
+
+#Help/error response output
+h="Mycroft launcher
+-c	open Mycroft Command Line Interface
+-d	start Mycroft in debugging mode
+-e	kill Mycroft
+-h	open this help dialog and exit
+-s	start Mycroft
+-u      update Mycroft from Github (this takes a while)"
+
+#Declare flag variable and set to an unused variable in case nothing is passed
+flag=0
+
+#Declare u variable
+u=0
+
+#Get flags and set corresponding variable's value
+while getopts 'usehcd' flag; do
+	case "${flag}" in
+		s) u=1 ;;
+		e) u=2 ;;
+		h) u=3 ;;
+		d) u=6 ;;
+		c) u=5 ;;
+		u) u=7 ;;
+		*) u=4 ;;
+	esac
+
+#Run variable u value`s designated command
+if [ $u -eq 1 ] ; then
+#	If available, start mycroft loading screen app to launch mycroft. If unavailable, start mycroft using the normal method
+	[ -e $HOME/mycroft-core/MLS/loader.sh ] && $HOME/mycroft-core/MLS/loader.sh || $HOME/mycroft-core/start-mycroft.sh all
+fi
+if [ $u -eq 2 ] ; then
+#	Stop mycroft
+	$HOME/mycroft-core/stop-mycroft.sh
+fi
+if [ $u -eq 3 ] ; then
+#	Display help dialogue
+	echo "$h"
+fi
+if [ $u -eq 4 ] ; then
+#	Notify of unrecognized option, give accepted options, notify of abortion
+	echo -e "\nOption not recognized.\n\n$h\n\nAborting...\n"
+fi
+if [ $u -eq 5 ] ; then
+#	Start Mycroft CLI
+	$HOME/mycroft-core/start-mycroft.sh cli
+fi
+if [ $u -eq 6 ] ; then
+#	Start Mycroft in debug mode
+	$HOME/mycroft-core/start-mycroft.sh debug
+fi
+if [ $u -eq 7 ] ; then
+#	Update Mycroft from core repository on https://github.com/MycroftAI/mycroft-core
+	$HOME/mycroft-core/stop-mycroft.sh
+	echo -e "\nUpdating Mycroft. This may take some time...\n"
+	cd  $HOME/mycroft-core
+   	git pull https://github.com/MycroftAI/mycroft-core
+	read -p "Would you like to run dev_setup.sh? [y/N]: " ans
+	if [[ "$ans" == "y" ]] || [[ "$ans" == "Y" ]]; then
+		bash $HOME/mycroft-core/dev_setup.sh
+	fi
+	echo -e "\nMycroft has been updated. Please run 'mycroft -s' to restart.\n"
+fi
+done

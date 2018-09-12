@@ -1,0 +1,56 @@
+Version 0.0.1-alpha
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -created the mycroft script for easy command line control of the Mycroft AI
+
+Version 0.0.2-beta
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -made launch screen for Mycroft using gifview
+
+Version 0.0.3-beta
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -perfected timing for Mycroft loading screen
+    -perfected placement of Mycroft loading screen
+        -in 60 fps:
+            -loads in 4 frames into the top left corner of the screen
+            -immediatly placed into the center after loading
+
+Version 0.0.4-beta
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -replaced the usage of gifview with normal GTK by using a Python script
+    -removed the title bar from the top of the window
+
+Version 0.0.5-beta
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -perfected GTK loading timing so it is in-sync with Mycroft loading time
+
+Version 0.0.6-beta
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -created README.md
+
+Version 0.0.7-beta
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -fixed error from loader.sh
+    
+Version 0.0.8
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -uploaded to Github for public use
+
+Version 0.0.9
+Gideon White <ubudroiddevs@gmail.com>
+    -created man page for mycroft launcher script
+    
+Version 0.1.0
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -performance improvements
+    -installer script
+    -fixed man page formatting
+
+Version 0.1.1
+Thomas Castleman <ubudroiddevs@gmail.com>
+    -added update mechanism to update Mycroft with a single command
+
+Version 0.1.2
+Thomas Castleman <thomas.castleman2019@gmail.com>
+	-Added ability to run dev_setup.sh again through the update command, `mycroft -u`
+
+
