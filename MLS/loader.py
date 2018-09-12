@@ -3,13 +3,30 @@
 #
 #  loader.py
 #  
+#  Copyright 2018 Thomas Castleman <draugeros@gmail.com>
+#  
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#  
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#  
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#  
+#  
 import gi
 import os
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, Pango
 home = os.environ["HOME"]
-location = "%s/Dropbox/MLS/loader.gif" % (home)
-#location = "%s/mycroft-core/MLS/loader.gif" % (home)
+location = "%s/mycroft-core/MLS/loader.gif" % (home)
 import subprocess
 resuls = subprocess.Popen(['xrandr'],stdout=subprocess.PIPE).communicate()[0].split("current")[1].split(",")[0]
 width = resuls.split("x")[0].strip()
