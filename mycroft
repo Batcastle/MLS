@@ -21,7 +21,7 @@
 #  MA 02110-1301, USA.
 #
 
-#Set variables ahead of time
+#set variables ahead of time
 
 #Help/error response output
 h="Mycroft launcher
@@ -53,15 +53,19 @@ while getopts 'usehcd' flag; do
 #Run variable u value`s designated command
 if [ $u -eq 1 ] ; then
 #	If available, start mycroft loading screen app to launch mycroft. If unavailable, start mycroft using the normal method
-	[ -e $HOME/mycroft-core/MLS/loader.sh ] && $HOME/mycroft-core/MLS/loader.sh || $HOME/mycroft-core/start-mycroft.sh all
+	if [ -e $HOME/mycroft-core/MLS/loader.sh ]; then
+		$HOME/mycroft-core/MLS/loader.sh
+	else
+		$HOME/mycroft-core/start-mycroft.sh all
+	fi
 fi
 if [ $u -eq 2 ] ; then
-#	Stop mycroft
+#	stop mycroft
 	$HOME/mycroft-core/stop-mycroft.sh
 fi
 if [ $u -eq 3 ] ; then
 #	Display help dialogue
-	echo "$h"
+	echo -e "\n$h\n"
 fi
 if [ $u -eq 4 ] ; then
 #	Notify of unrecognized option, give accepted options, notify of abortion
@@ -81,10 +85,29 @@ if [ $u -eq 7 ] ; then
 	echo -e "\nUpdating Mycroft. This may take some time...\n"
 	cd  $HOME/mycroft-core
    	git pull https://github.com/MycroftAI/mycroft-core
-	read -p "Would you like to run dev_setup.sh? [y/N]: " ans
+#	give option to re-run dev_setup.sh
+	read -p "
+Would you like to run dev_setup.sh? [y/N]: " ans
 	if [[ "$ans" == "y" ]] || [[ "$ans" == "Y" ]]; then
-		bash $HOME/mycroft-core/dev_setup.sh
+#	give option to rebuild Mimic
+		read -p "
+Would you like to rebuild Mimic? [y/N]: " ans
+		if [[ "$ans" == "y" ]] || [[ "$ans" == "Y" ]]; then
+			bash $HOME/mycroft-core/dev_setup.sh -fm
+		else
+			bash $HOME/mycroft-core/dev_setup.sh
+		fi
 	fi
-	echo -e "\nMycroft has been updated. Please run 'mycroft -s' to restart.\n"
+	read -p "
+Would you like to re-start Mycroft? [y/N]: " ans
+	if [[ "$ans" == "y" ]] || [[ "$ans" == "Y" ]]; then
+		if [ -e $HOME/mycroft-core/MLS/loader.sh ]; then
+			$HOME/mycroft-core/MLS/loader.sh
+		else
+			$HOME/mycroft-core/start-mycroft.sh all
+		fi
+	else
+		echo -e "\nPlease run {mycroft -s} to restart Mycroft manually.\n"
+	fi
 fi
 done
