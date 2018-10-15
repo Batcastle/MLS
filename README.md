@@ -1,7 +1,8 @@
 # **Mycroft Loading Screen**
 #### By Thomas Castleman
-#### Lead Developer, Drauger OS
-###### <draugeros@gmail.com>
+#### Lead Dev, Drauger OS
+#### <draugeros@gmail.com>
+#### https://draugeros.ml
 A loading screen for the Mycroft AI (find at https://github.com/MycroftAI/mycroft-core/blob/dev/README.md )
 ---
 
