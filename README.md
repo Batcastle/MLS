@@ -22,6 +22,10 @@ mycroft-core
 ```
 Please also note that `mycroft-core` must be installed to your home directory for this application to work.
 
+# Installing
+
+To install MLS, simply run `sudo mls_first-run.sh` and it will copy everything into the proper place
+
 # RUNNING
 To start Mycroft with this application, run `mycroft -s` in your command line
 
@@ -34,5 +38,9 @@ To do each, respectively, run:
 * `mycroft -u`
 
 If you need help, feel free to email us at the email provided above. Our Team will try our best to help as much as possible.
+
+## Known Bugs
+
+MLS currently does not work with Wayland, only with X11. If you are using Wayland, please switch to X11 in order to use MLS.
 
 **Thank you again!**
