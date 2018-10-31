@@ -26,7 +26,7 @@ Please also note that `mycroft-core` must be installed to your home directory fo
 
 To install MLS, simply run `sudo mls_first-run.sh` and it will copy everything into the proper place
 
-# RUNNING
+# Running
 To start Mycroft with this application, run `mycroft -s` in your command line
 
 This application can also kill Mycroft, start the command line interface for Mycroft, and start Mycroft in debugging mode. Furthermore, it can auto-update mycroft.
